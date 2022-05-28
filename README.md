@@ -7,11 +7,12 @@ URLShortenerService uses Docker to build and run the API Service, and links to t
 ## Dependencies
 * [.NET 6 SDK / ASP.NET Runtime](https://dotnet.microsoft.com/en-us/download/dotnet/6.0)
 * [Visual Studio 2022](https://visualstudio.microsoft.com/vs/)
-* [Docker](https://docs.docker.com/get-docker/) - MAKE SURE YOU ARE USING DOCKER-COMPOSE V2.X.X 
+* [Docker](https://docs.docker.com/get-docker/)
 * Windows/Linux
 
 ## Quick Caveats
 - An SQL script runs against the MySQL DB adding 10000 randomly generated URL entries. Please wait for this script to finish when performing the *docker-compose up* before running and API Requests
+- Make sure you are using docker-compose V2.X.X 
 
 
 ## Building Locally
