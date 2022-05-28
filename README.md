@@ -6,7 +6,8 @@ URLShortenerService uses Docker to build and run the API Service, and links to t
 
 ## Dependencies
 * [.NET 6 SDK / ASP.NET Runtime](https://dotnet.microsoft.com/en-us/download/dotnet/6.0)
-* [Docker](https://docs.docker.com/get-docker/)
+* [Visual Studio 2022](https://visualstudio.microsoft.com/vs/)
+* [Docker](https://docs.docker.com/get-docker/) - MAKE SURE YOU ARE USING DOCKER-COMPOSE V2.X.X 
 * Windows/Linux
 
 ## Quick Caveats
@@ -50,11 +51,11 @@ Url already shortened: xQc
 ```
 127.0.0.1:5000/{code}
 ```
-200 OK - Response: Original Long URL 
+200 OK - Response: Original Long URL
 ```
 https://ea.gr8people.com/jobs/123456
 ```
-404 NotFound - Response: Notification that URL has already been shortened, with corresponding code 
+404 NotFound - Response: 
 ```
 ID Not found in URL DB
 ```
