@@ -31,6 +31,20 @@ $ cd ./URLShortenerService
 $ docker-compose -f .\docker-compose.yml up
 ```
 
+When finished, use the following command to shutdown containers. Database will be persisted unless you remove the docker volume.
+
+```
+$ cd ./URLShortenerService
+$ docker-compose -f .\docker-compose.yml down
+```
+
+To destroy database:
+```
+$ cd ./URLShortenerService
+$ docker volume ls
+$ docker volume rm <volume_name>
+```
+
 ### API
 #### PUT Shorten URL
 ```

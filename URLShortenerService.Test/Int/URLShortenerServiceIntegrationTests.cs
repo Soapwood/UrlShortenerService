@@ -99,4 +99,41 @@ public class UrlShortenerServiceIntegrationTests
 
         return Tuple.Create(putResponseText, getResponseText);
     }
+
+    /// <summary>
+    /// Add URL with random six digit code to DB
+    /// </summary>
+    /// <returns></returns>
+    [Test]
+    [Category("Integration")]
+    public async Task ValidateDbCollisionReturns409AndShortUrl()
+    {
+        Random generator = new Random();
+        String randomNum = generator.Next(0, 1000000).ToString("D6");
+
+        string shortenTestUrl = _testUrlBase + randomNum;
+
+        var responses = await ValidateNewEntry(shortenTestUrl);
+        string putResponseText = responses.Item1;
+        string getResponseText = responses.Item2;
+
+        Assert.IsNotNull(putResponseText);
+
+        Console.WriteLine($"Testing {getResponseText} == {shortenTestUrl}");
+        Assert.AreEqual(getResponseText, shortenTestUrl);
+
+        Console.WriteLine($"Testing: {_serviceUrl}{_shortenApiCall}");
+
+        // Add same URL again
+        var httpContent = new StringContent($"{{\"longUrl\": \"{shortenTestUrl}\"}}", Encoding.UTF8, "application/json");
+        HttpResponseMessage repeatedPutResponse = await _client.PutAsync(new Uri(_serviceUrl + _shortenApiCall), httpContent);
+
+        var repeatedPutResponseText = await repeatedPutResponse.Content.ReadAsStringAsync();
+
+        Console.WriteLine($"Response: {repeatedPutResponseText}");
+        Assert.AreEqual(repeatedPutResponse.StatusCode, System.Net.HttpStatusCode.Conflict);
+        
+        // Verify original generated code is in the 409 response.
+        StringAssert.Contains(putResponseText, repeatedPutResponseText);
+    }
 }
