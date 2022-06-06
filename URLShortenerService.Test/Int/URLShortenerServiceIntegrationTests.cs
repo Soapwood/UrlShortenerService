@@ -60,7 +60,7 @@ public class UrlShortenerServiceIntegrationTests
         for(int i = 0; i < 500; i++)
         {
             Random generator = new Random();
-            String randomNum = generator.Next(0, 1000000).ToString("D10");
+            String randomNum = generator.Next(0, 100000000).ToString("D10");
 
             string shortenTestUrl = _testUrlBase + randomNum;
 
